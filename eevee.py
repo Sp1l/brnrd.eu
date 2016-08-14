@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Bernard Spil'
 SITENAME = u'brnrd - Bernard Spil'
-SITEURL = 'https://brnrd.eu'
+SITEURL = 'https://brnrd.eu/eevee'
 
 PATH = 'content'
 
@@ -30,13 +30,14 @@ LINKS = (('FreeBSD', 'http://freebsd.org/'),
         )
 
 # Social widget
-SOCIAL = (('<i class="fa-li fa fa-twitter"></i> Twitter', 'https://twitter.com/Sp1l'),
-          ('<i class="fa-li fa fa-facebook"></i> Facebook', 'https://facebook.com/bernard.spil'),
-          ('<i class="fa-li fa fa-github"></i> Github', 'https://github.com/Sp1l'),
-          ('<i class="fa-li fa"></i> FreeBSD', 'https://wiki.freebsd.org/BernardSpil'),
-         )
-
-DISPLAY_PAGES_ON_MENU = False
+#SOCIAL = (('<i class="fa-li fa fa-twitter"></i> Twitter', 'https://twitter.com/Sp1l'),
+#          ('<i class="fa-li fa fa-facebook"></i> Facebook', 'https://facebook.com/bernard.spil'),
+#          ('<i class="fa-li fa fa-github"></i> Github', 'https://github.com/Sp1l'),
+#          ('<i class="fa-li fa"></i> FreeBSD', 'https://wiki.freebsd.org/BernardSpil'),
+#         )
+SOCIAL = (('Github', 'https://github.com/Sp1l'),
+          ('Twitter', 'https://twitter.com/Sp1l'),
+          ('Facebook', 'https://www.facebook.com/bernard.spil'))
 
 DEFAULT_PAGINATION = False
 
@@ -50,16 +51,16 @@ STATIC_PATHS = ['img','favicon.ico']
 
 # Modified clone of https://github.com/Samael500/w3-personal-blog
 # Repo incl modifications at https://github.com/Sp1l/w3-personal-blog
-THEME = './themes/w3-personal-blog'
+THEME = './themes/eevee'
 
 # ./plugins is a symlink to a repo clone of https://github.com/getpelican/pelican-plugins
 PLUGIN_PATHS= ["./plugins",]
-PLUGINS = ["pelican-toc","bootstrapify","tipue_search","sitemap"]
+#PLUGINS = ["pelican-toc","bootstrapify","tipue_search","sitemap"]
 
-MD_EXTENSIONS = ['toc','codehilite','admonition',"tables"]
+#MD_EXTENSIONS = ['toc','codehilite','admonition',"tables"]
 
-TOC_RUN = False
-TOC_HEADERS = '^h[1-2]'
+#TOC_RUN = False
+#TOC_HEADERS = '^h[1-2]'
 
 SITEMAP = {
     'format': 'xml'
@@ -67,3 +68,11 @@ SITEMAP = {
 
 LOAD_CONTENT_CACHE = True
 CHECK_MODIFIED_METHOD = 'mtime'
+
+THEME_PRIMARY = "orange"
+THEME_ACCENT = "teal"
+
+MEGA_FOOTER = False
+
+DISPLAY_PAGES_ON_MENU = True
+DISPLAY_CATEGORIES_ON_MENY = True

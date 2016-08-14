@@ -1,6 +1,6 @@
 Title: LetsKencrypt
 Date: 2016-06-18
-Modified: 2016-07-16
+Modified: 2016-08-08
 Tags: LetsEncrypt, SSL, FreeBSD, SysAdmin
 Category: Security
 Author: Bernard Spil
@@ -116,14 +116,14 @@ Now every (non-ssl) Virtual Host that I have gets a on-line addition
 
 You'll need to add the following to the top of your ```location``` matches so requests from LetsEncrypt's acme servers get the correct responses.
 
-   :::
-	# Letsencrypt needs http for acme challenges
-	location ^~ /.well-known/acme-challenge/ {
-	    proxy_redirect off;
-	    default_type "text/plain";
-	    root /usr/local/www/.well-known/acme-challenge ;
-	    allow all;
-	}
+    :::
+	 # Letsencrypt needs http for acme challenges
+	 location ^~ /.well-known/acme-challenge/ {
+	     proxy_redirect off;
+	     default_type "text/plain";
+	     root /usr/local/www/.well-known/acme-challenge ;
+	     allow all;
+	 }
 
 # Lets<i>k</i>encrypt configuration 
 
@@ -195,12 +195,17 @@ The script tries to make sure all things that need to exist actually do exist. S
        # create a hardlink for cert/chain/fullchain and domainkey if non-existent
        backupCertAndKey ${CERTDIR} ${DOMAINKEY}
 
+       # letskencrypt returns RC=2 when certificates weren't changed
+       set +e
        # Renew the key and certs if required
        letskencrypt -C "${CHALLENGEDIR}" \
                     -k "${DOMAINKEY}" \
                     -c "${CERTDIR}" \
                     ${EXTRAARGS} \
                     ${domain} ${subdomains}
+       RC=$?
+       set -e
+       [ $RC -ne 2 ] && exit 1
     done
 
 ### In-line configuration
@@ -360,3 +365,4 @@ Since `letskencrypt` runs as root you don't need to separate the renew and deplo
 ### Changes
 
 2016-07-16: Added nginx config and sample deploy script
+2016-08-08: Fixed error in renew script, letskencrypt has exit status 2 when certs haven't changed

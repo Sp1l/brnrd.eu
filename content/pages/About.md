@@ -45,7 +45,7 @@ the internet.
 
 # This blog
 
-The blog is created using [Pelican](http://getpelican.com) which is a static page generator. I use the [w3-personal-blog](https://github.com/samael500/w3-personal-blog/) template which I've edited to suit my needs.
+The blog is created using [Pelican](http://getpelican.com) which is a static page generator. I use the [w3-personal-blog](https://github.com/samael500/w3-personal-blog/) template which I've edited to suit my needs. You can find the [source (markdown) files](https://github.com/Sp1l/brnrd.eu) and the [modififed theme](https://github.com/Sp1l/w3-personal-blog) on my [GitHub repo](https://github.com/Sp1l).
 
 All in all I've found this very easy to use for a non-webdev like me!
 
