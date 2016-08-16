@@ -1,13 +1,14 @@
 ﻿Title: Fixing failing ports for Hardened/LibreBSD
 Tags: SSL, LibreSSL, OpenSSL, FreeBSD, HardenedBSD
 Created: 2016-04-17
+Updated: 2016-08-16
 Author: Bernard Spil
 Image: /img/HardenedBSDLibreSSL.png
 Summary: HardenedBSD ran an `exp-run` with LibreSSL in base. This was expected to uncover a lot of issues where ports check the `OPENSSL_VERSION_NUMBER` to determine if a feature is available. To my surprise, it only uncovered 12 ports that failed due to these version checks.
 
 ## Prelude
 
-The [LibreSSL](http://libressl.org) ports on FreeBSD include a patch that modifies the OpenSSL version in the header files
+The [LibreSSL](http://libressl.org) ports (up to 2.4) on FreeBSD include a patch that modifies the OpenSSL version in the header files
 
 	:::patch
 	--- include/openssl/opensslv.h.orig     2015-09-11 22:35:14 UTC
@@ -42,7 +43,7 @@ When replacing OpenSSL with LibreSSL for HardenedBSD, I decided to do away with 
 | security/wpa_supplicant |
 | security/xca |
 
-A side-effect of this exp-run is that we are detecting ports that do not set or honor `USE_OPENSSL= yes` in the port's Makefile. This means that they weren't failing when `WITH_OPENSSL_PORT= yes` and `OPENSSL_PORT= security/libressl-devel` is set during build of ports but they are failing now because there's no OpenSSL libcrypto/libssl available on the system.
+A side-effect of this exp-run is that we are detecting ports that do not set or honor `USES= ssl` (which replaces `USE_OPENSSL= yes` since June) in the port's Makefile. This means that they weren't failing when `DEFAULT_VERSIONS+= ssl=libressl-devel` (which replaces `WITH_OPENSSL_PORT= yes` and `OPENSSL_PORT= security/libressl-devel` since June) is set during build of ports but they are failing now because there's no OpenSSL libcrypto/libssl available on the system.
 
 | Port | Problem |
 |:-----|:-------:|
@@ -91,3 +92,13 @@ All in all there are 204 ports with issues most have patches as well. Not sure i
 | Other | Non categorized | 25 |
 
 The majority of issues is with the removal of SSLv3. This should improve quickly over the coming months as OpenSSL 1.1 gets released which removes SSLv3 in the default build configuration as well.
+
+### Updates
+
+2016-08-16:
+ * [LibreSSL as of 2.4 in ports](https://svnweb.freebsd.org/ports?view=revision&revision=420102) no longer has the `OPENSSL_VERSION_NUMBER` patch
+ * [ssl in ports' framework was refactored](https://svnweb.freebsd.org/ports?view=revision&revision=416965)
+   - `USE_OPENSSL= yes` is replaced with `USES= ssl`
+   - `WITH_OPENSSL_PORT must no longer be used`
+   - `OPENSSL_PORT= security/libressl-devel` is replaced with `DEFAULT_VERSIONS+= ssl=libressl-devel`
+
