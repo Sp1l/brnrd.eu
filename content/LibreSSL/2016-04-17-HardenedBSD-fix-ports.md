@@ -96,6 +96,7 @@ The majority of issues is with the removal of SSLv3. This should improve quickly
 ### Updates
 
 2016-08-16:
+
  * [LibreSSL as of 2.4 in ports](https://svnweb.freebsd.org/ports?view=revision&revision=420102) no longer has the `OPENSSL_VERSION_NUMBER` patch
  * [ssl in ports' framework was refactored](https://svnweb.freebsd.org/ports?view=revision&revision=416965)
    - `USE_OPENSSL= yes` is replaced with `USES= ssl`
