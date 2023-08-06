@@ -65,7 +65,7 @@ With the change below the Makefile has been reduced from 244 to 171 lines.
 
 ## Order, standards
 
-All descritions where defined using	
+All descriptions were defined using
 `<OPT>_DESC?= some description`	
 which is not standard. Replace `?=` with a `=`
 
@@ -139,7 +139,7 @@ OpenSSL supports a **lot** of ciphers, hashes and protocols and some are very ou
 
 ## Result
 
-![openssl-devel options]({filename}/img/OpenSSL-devel-config.png)
+![openssl-devel options]({static}/img/OpenSSL-devel-config.png)
 
 # Bugs
 
