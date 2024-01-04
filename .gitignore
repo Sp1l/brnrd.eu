@@ -1,10 +1,10 @@
-w3-personal-blog/*
-output/*
-output
-plugins/*
-plugins
+.venv/
+bin/
+output/
+plugins/
 *.zip
 *.tgz
+pelicanconf-*.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
