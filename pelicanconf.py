@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
 
-AUTHOR = u'Bernard Spil'
-SITENAME = u'brnrd - Bernard Spil'
+AUTHOR = 'Bernard Spil'
+SITENAME = 'brnrd - Bernard Spil'
 SITEURL = 'https://brnrd.eu'
 
 PATH = 'content'
@@ -30,11 +29,11 @@ LINKS = (('FreeBSD', 'http://freebsd.org/'),
         )
 
 # Social widget
-SOCIAL = (('<i class="fa-li fa fa-twitter"></i> Twitter', 'https://twitter.com/Sp1l'),
-          ('<i class="fa-li fa fa-facebook"></i> Facebook', 'https://facebook.com/bernard.spil'),
-          ('<i class="fa-li fa fa-github"></i> Github', 'https://github.com/Sp1l'),
-          ('<i class="fa-li fa"></i> FreeBSD', 'https://wiki.freebsd.org/BernardSpil'),
-         )
+SOCIAL = (
+    ('<i class="fa-li fa fa-mastodon"></i> Mastodon', 'https://bsd.network/brnrd'),
+    ('<i class="fa-li fa fa-github"></i> Github', 'https://github.com/Sp1l'),
+    ('<i class="fa-li fa"></i> FreeBSD', 'https://wiki.freebsd.org/BernardSpil'),
+)
 
 DISPLAY_PAGES_ON_MENU = False
 
@@ -54,9 +53,16 @@ THEME = './themes/w3-personal-blog'
 
 # ./plugins is a symlink to a repo clone of https://github.com/getpelican/pelican-plugins
 PLUGIN_PATHS= ["./plugins",]
-PLUGINS = ["pelican-toc","bootstrapify","tipue_search","sitemap"]
+PLUGINS = ["pelican-toc","bootstrapify","sitemap"]
 
-MD_EXTENSIONS = ['toc','codehilite','admonition',"tables"]
+MARKDOWN = {
+    "extension_configs": {
+       'markdown.extensions.toc': {},
+       'markdown.extensions.codehilite': {},
+       'markdown.extensions.admonition': {},
+       "markdown.extensions.tables": {},
+    }
+}
 
 TOC_RUN = False
 TOC_HEADERS = '^h[1-2]'
