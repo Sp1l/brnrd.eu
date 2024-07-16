@@ -58,7 +58,7 @@ The FAT32 partition will be `/dev/vda1` in Alpine. Using partition type fat32 fa
 
 Modify your `/vm/Alpine/Alpine.conf` to something like
 
-```:::conf
+```
 loader="grub"
 graphics="no"
 cpu=4
@@ -84,7 +84,7 @@ Note: The disk0 iso is mapped to the VM as hd0. disk1 will be /dev/vda in Alpine
 
 Python scriptlet to get latest URL from Alpine's download CDN, you'll need to have the `devel/py-yaml` port installed.
 
-```:::python
+```
 #!/usr/bin/env python3
 
 import urllib.request

@@ -84,7 +84,7 @@ A **lot** of time was spent modifying software code to make it work without all 
 
 **Now** is the time to switch to using LibreSSL. You'd be in good company, [VOID Linux](http://voidlinux.eu), [OpenELEC](http://openelec.tv) and [PC-BSD](http://pcbsd.org) use LibreSSL already, [Alpine Linux](http://alpinelinux.org/) will be joining soon.
 
-![Operating systems using LibreSSL]({filename}/img/AlpineVoidPCBSD.png)
+![Operating systems using LibreSSL]({static}/img/AlpineVoidPCBSD.png)
 
 The greatest compliment I've received from the projects using the patches I created was when I asked what his experience was with the switch to LibreSSL and the response was "uneventful". There's proof for you that it isn't all that difficult to switch!
 
