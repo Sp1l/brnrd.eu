@@ -2,6 +2,7 @@ Title: Changing Remote Desktop service certificate
 Tags: Network Windows RemoteDesktop RDP Certificate
 Category: Security
 Created: 2024-01-12
+Modified: 2024-04-05
 Author: Bernard Spil
 Image: /img/RDPCertWarning.png
 Summary: By default, Windows Server will generate a self-signed certificate for the Remote Desktop Service. Using a different certificate is not trivial, but is doable as this post shows.
@@ -20,6 +21,18 @@ Remote Desktop service.
 If you do not have Active Directory Certificate Services deployed, you
 can use other certificates, like LetsEncrypt's, as well. See the Win-Acme
 paragraph.
+
+## Check currently used RDP certificate
+
+```powershell
+try {
+    (Get-WmiObject -class "Win32_TSGeneralSetting" -Namespace root\cimv2\terminalservices -Filter "TerminalName='RDP-tcp'").SSLCertificateSHA1Hash
+} catch {
+    wmic /namespace:\\root\cimv2\TerminalServices PATH Win32_TSGeneralSetting Get SSLCertificateSHA1Hash
+}
+```
+
+this will return the SHA1 fingerprint of the currently used certificate for RDP. It matches the "Thumbprint" that you can find in a certificate's details in `certlm.msc` or by using the "View certificate..." button in the "Certificate errors" RDP dialog.
 
 ## Finding the right certificate
 
@@ -56,7 +69,7 @@ select all certificates issued by your domain:
 try {
     # This works on modern Windows Server versions, fails on Windows Server 2012
     $path = (Get-WmiObject -class "Win32_TSGeneralSetting" -Namespace root\cimv2\terminalservices -Filter "TerminalName='RDP-tcp'").__path
-    Set-WmiInstance -Path $path -argument @{SSLCertificateSHA1Hash=$thumbprint}
+    Set-WmiInstance -Path $path -argument @{SSLCertificateSHA1Hash=$cert.Thumbprint}
 } catch {
     # Fallback for older Windows Server versions like 2012
     wmic /namespace:\\root\cimv2\TerminalServices PATH Win32_TSGeneralSetting Set SSLCertificateSHA1Hash="$($cert.Thumbprint)"
